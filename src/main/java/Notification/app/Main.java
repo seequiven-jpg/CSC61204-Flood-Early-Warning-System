@@ -1,12 +1,12 @@
-package floodwarning.app;
+package Notification.app;
 
-import floodwarning.api.FloodDataClient;
-import floodwarning.model.FloodReading;
-import floodwarning.observer.ShelterAwareFloodAlertObserver;
-import floodwarning.repository.ShelterRepository;
-import floodwarning.service.ConsoleNotificationSender;
-import floodwarning.service.FloodMonitoringService;
-import floodwarning.strategy.BasicRiskAssessmentStrategy;
+import Notification.api.FloodDataClient;
+import Notification.model.FloodReading;
+import Notification.observer.ShelterAwareFloodAlertObserver;
+import Notification.repository.ShelterRepository;
+import Notification.sender.ConsoleNotificationSender;
+import Notification.sender.FloodMonitoringService;
+import Notification.strategy.BasicRiskAssessmentStrategy;
 
 import java.util.List;
 

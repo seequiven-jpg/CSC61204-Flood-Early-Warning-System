@@ -1,6 +1,6 @@
-package floodwarning.repository;
+package Notification.repository;
 
-import floodwarning.model.Shelter;
+import Notification.model.Shelter;
 
 import java.util.List;
 import java.util.Locale;

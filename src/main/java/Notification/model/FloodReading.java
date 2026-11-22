@@ -1,4 +1,4 @@
-package floodwarning.model;
+package Notification.model;
 
 /** Current observed or simulated flood reading for one neighbourhood. */
 public record FloodReading(String location, double riverLevelMetres, double rainfallMillimetresPerHour, String observedAt) {

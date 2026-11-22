@@ -1,4 +1,4 @@
-package floodwarning.model;
+package Notification.model;
 
 /** A shelter and its current bed capacity. */
 public record Shelter(String name, String location, int capacity, int occupied) {

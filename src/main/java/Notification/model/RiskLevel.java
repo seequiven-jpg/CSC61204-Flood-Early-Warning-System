@@ -1,2 +1,2 @@
-package floodwarning.model;
+package Notification.model;
 public enum RiskLevel { NORMAL, ALERT, WARNING, DANGER }

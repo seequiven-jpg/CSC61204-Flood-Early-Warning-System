@@ -1,10 +1,10 @@
-package floodwarning.service;
+package Notification.sender;
 
-import floodwarning.api.FloodDataClient;
-import floodwarning.model.FloodReading;
-import floodwarning.model.RiskLevel;
-import floodwarning.observer.FloodAlertObserver;
-import floodwarning.strategy.RiskAssessmentStrategy;
+import Notification.api.FloodDataClient;
+import Notification.model.FloodReading;
+import Notification.model.RiskLevel;
+import Notification.observer.FloodAlertObserver;
+import Notification.strategy.RiskAssessmentStrategy;
 
 import java.io.IOException;
 import java.util.ArrayList;

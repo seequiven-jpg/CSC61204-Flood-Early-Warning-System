@@ -1,4 +1,4 @@
-package floodwarning.service;
+package Notification.sender;
 
 /** Local demo sender; writes the notification to the application console. */
 public final class ConsoleNotificationSender implements NotificationSender {

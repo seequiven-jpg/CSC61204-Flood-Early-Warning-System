@@ -1,10 +1,10 @@
-package floodwarning.observer;
+package Notification.observer;
 
-import floodwarning.model.FloodReading;
-import floodwarning.model.RiskLevel;
-import floodwarning.model.Shelter;
-import floodwarning.repository.ShelterRepository;
-import floodwarning.service.NotificationSender;
+import Notification.model.FloodReading;
+import Notification.model.RiskLevel;
+import Notification.model.Shelter;
+import Notification.repository.ShelterRepository;
+import Notification.sender.NotificationSender;
 
 import java.util.Comparator;
 import java.util.List;

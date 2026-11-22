@@ -8,7 +8,7 @@ From the project folder, run:
 
 ```powershell
 mvn compile
-java -cp target/classes floodwarning.app.Main
+java -cp target/classes Notification.app.Main
 ```
 
 The demo readings, recipient address, and shelter capacities are sample values. Replace them with your data source and recipient list. The current sender prints alerts to the console; connect an email or SMS provider in `NotificationSender` for external delivery.
