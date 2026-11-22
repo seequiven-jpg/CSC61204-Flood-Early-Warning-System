@@ -3,62 +3,55 @@ package floodwarning.observer;
 import floodwarning.model.FloodReading;
 import floodwarning.model.RiskLevel;
 import floodwarning.model.Shelter;
-import floodwarning.model.User;
 import floodwarning.repository.ShelterRepository;
-import floodwarning.repository.userRepository;
 import floodwarning.service.NotificationSender;
 
-import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
-/** Sends each registered resident a risk alert with the best available local shelter. */
+/** Builds a risk alert and recommends a shelter with available beds. */
 public final class ShelterAwareFloodAlertObserver implements FloodAlertObserver {
-    private final userRepository users;
+    private final List<String> recipients;
     private final ShelterRepository shelters;
     private final NotificationSender sender;
 
     public ShelterAwareFloodAlertObserver(
-            userRepository users,
+            List<String> recipients,
             ShelterRepository shelters,
             NotificationSender sender) {
-        this.users = Objects.requireNonNull(users);
+        this.recipients = List.copyOf(recipients);
         this.shelters = Objects.requireNonNull(shelters);
         this.sender = Objects.requireNonNull(sender);
     }
 
     @Override
     public void onRiskChanged(FloodReading reading, RiskLevel level) {
-        List<Shelter> available = shelters.findAvailableByLocation(reading.location());
-        Shelter recommended = available.stream()
-                .max(Comparator.comparingInt(Shelter::availableBeds))
-                .orElse(null);
+        Shelter recommended = level == RiskLevel.NORMAL
+                ? null
+                : shelters.findAvailableByLocation(reading.location()).stream()
+                        .max(Comparator.comparingInt(Shelter::availableBeds))
+                        .orElse(null);
         String subject = "Flood " + level + " alert: " + reading.location();
         String message = buildMessage(reading, level, recommended);
 
-        try {
-            for (User resident : users.findResidents()) {
-                sender.send(resident.email(), subject, message);
-            }
-        } catch (IOException e) {
-            System.err.println("Could not load resident notification recipients: " + e.getMessage());
+        for (String recipient : recipients) {
+            sender.send(recipient, subject, message);
         }
     }
 
     private String buildMessage(FloodReading reading, RiskLevel level, Shelter recommended) {
         String action = switch (level) {
+            case NORMAL -> "The flood risk has returned to normal. Continue to follow official updates.";
             case ALERT -> "Stay alert and monitor official updates.";
             case WARNING -> "Prepare to evacuate if instructed by local authorities.";
             case DANGER -> "Move to safety and follow local emergency instructions.";
-            case NORMAL -> "The flood risk has returned to normal. Continue to follow official updates.";
         };
-
-        String shelterInfo = level == RiskLevel.NORMAL
-                ? "No shelter recommendation is needed while risk is normal."
-                : recommended == null
-                ? "No available shelter beds are listed for " + reading.location()
-                    + ". Contact local authorities for assistance."
+        String shelterInfo = recommended == null
+                ? (level == RiskLevel.NORMAL
+                    ? "No shelter recommendation is needed while risk is normal."
+                    : "No available shelter beds are listed for " + reading.location()
+                        + ". Contact local authorities for assistance.")
                 : "Recommended shelter: " + recommended.name() + " (" + recommended.location()
                     + "), " + recommended.availableBeds() + " beds available.";
 
