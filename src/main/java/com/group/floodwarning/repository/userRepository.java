@@ -91,4 +91,11 @@ public final class userRepository {
             Files.deleteIfExists(temp);
         }
     }
+
+    /** Returns registered residents who should receive community alerts. */
+    public List<User> findResidents() throws IOException {
+        return readUsers().stream()
+                .filter(user -> user.role() == Role.RESIDENT)
+                .toList();
+    }
 }
