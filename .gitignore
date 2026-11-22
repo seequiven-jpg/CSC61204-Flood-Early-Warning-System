@@ -30,3 +30,7 @@ replay_pid*
 # Maven
 target/
 
+# Local account data
+/data/users.txt
+/data/users.txt.lock
+/data/users-*.tmp
