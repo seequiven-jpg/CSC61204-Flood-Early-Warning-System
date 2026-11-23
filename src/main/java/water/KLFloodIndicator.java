@@ -1,4 +1,4 @@
-package org.example;
+package water;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
