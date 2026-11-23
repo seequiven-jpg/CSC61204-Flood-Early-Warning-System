@@ -10,7 +10,6 @@ import Notification.strategy.BasicRiskAssessmentStrategy;
 
 import java.util.List;
 
-/** Runs a small local demonstration of flood-risk and shelter notifications. */
 public final class Main {
     private Main() {}
 
