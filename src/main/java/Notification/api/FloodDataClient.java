@@ -1,5 +1,5 @@
-package com.group.floodwarning.api;
-import com.group.floodwarning.model.FloodReading;
+package Notification.api;
+import Notification.model.FloodReading;
 import java.io.IOException;
 import java.util.List;
 /** Boundary for the selected public flood-data API. */

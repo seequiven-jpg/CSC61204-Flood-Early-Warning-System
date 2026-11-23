@@ -1,6 +1,6 @@
-package com.group.floodwarning.strategy;
-import com.group.floodwarning.model.FloodReading;
-import com.group.floodwarning.model.RiskLevel;
+package Notification.strategy;
+import Notification.model.FloodReading;
+import Notification.model.RiskLevel;
 /** Placeholder thresholds: replace with cited/local thresholds agreed by the team. */
 public final class BasicRiskAssessmentStrategy implements RiskAssessmentStrategy {
     @Override public RiskLevel assess(FloodReading reading) {
