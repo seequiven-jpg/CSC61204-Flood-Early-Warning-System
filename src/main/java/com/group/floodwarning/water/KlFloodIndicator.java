@@ -1,4 +1,4 @@
-package water;
+package com.group.floodwarning.water;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
